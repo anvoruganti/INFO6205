@@ -17,6 +17,7 @@ public class BaseHelper<X extends Comparable<X>> implements Helper<X> {
      */
     public static <Y extends Comparable<Y>> Helper<Y> getHelper(final Class<?> clazz) {
         try {
+            System.out.println("clazzz :::: "+clazz);
             return new BaseHelper<>("Standard Helper", Config.load(clazz));
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -156,6 +157,12 @@ public class BaseHelper<X extends Comparable<X>> implements Helper<X> {
      */
     public BaseHelper(String description, Config config) {
         this(description, 0, config);
+    }
+
+    public BaseHelper(){
+        this.description=null;
+        this.config=null;
+        this.random=null;
     }
 
     public static final String INSTRUMENT = "instrument";

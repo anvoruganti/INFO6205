@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -55,11 +56,13 @@ public class InsertionSortTest {
         list.add(2);
         list.add(1);
         Integer[] xs = list.toArray(new Integer[0]);
+//        Arrays.sort(xs);
+//        BaseHelper<Integer> helper = new BaseHelper<>();
+//        assertTrue(helper.sorted(xs));
         BaseHelper<Integer> helper = new BaseHelper<>("InsertionSort", xs.length, Config.load(InsertionSortTest.class));
         GenericSort<Integer> sorter = new InsertionSort<Integer>(helper);
         Integer[] ys = sorter.sort(xs);
         assertTrue(helper.sorted(ys));
-        System.out.println(sorter.toString());
     }
 
     @Test
@@ -70,6 +73,8 @@ public class InsertionSortTest {
         list.add(2);
         list.add(1);
         Integer[] xs = list.toArray(new Integer[0]);
+//        Arrays.sort(xs);
+//        BaseHelper<Integer> helper = new BaseHelper<>();
         BaseHelper<Integer> helper = new BaseHelper<>("InsertionSort", xs.length, Config.load(InsertionSortTest.class));
         GenericSort<Integer> sorter = new InsertionSort<Integer>(helper);
         sorter.mutatingSort(xs);
@@ -84,6 +89,9 @@ public class InsertionSortTest {
         list.add(2);
         list.add(1);
         Integer[] xs = list.toArray(new Integer[0]);
+//        Arrays.sort(xs);
+//        BaseHelper<Integer> helper = new BaseHelper<>();
+//        assertTrue(helper.sorted(xs));
         InsertionSort.sort(xs);
         assertTrue(xs[0] < xs[1] && xs[1] < xs[2] && xs[2] < xs[3]);
     }
