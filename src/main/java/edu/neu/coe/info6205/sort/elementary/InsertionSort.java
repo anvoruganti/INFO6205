@@ -58,6 +58,8 @@ public class InsertionSort<X extends Comparable<X>> extends SortWithHelper<X> {
         this(BaseHelper.getHelper(InsertionSort.class));
     }
 
+
+
     /**
      * Sort the sub-array xs:from:to using insertion sort.
      *
@@ -80,58 +82,5 @@ public class InsertionSort<X extends Comparable<X>> extends SortWithHelper<X> {
     public static <T extends Comparable<T>> void sort(T[] ts) {
         new InsertionSort<T>().mutatingSort(ts);
     }
-
-    public static void main(String[] args){
-        InsertionSort insertionSort = new InsertionSort();
-        Random random = new Random();
-
-        ArrayList<Integer> array_random = new ArrayList<>();
-        ArrayList<Integer> array_ordered = new ArrayList<>();
-        ArrayList<Integer> array_reverse = new ArrayList<>();
-        ArrayList<Integer> array_partially_ordered = new ArrayList<>();
-
-        for(int i=2000;i<35000;i=i*2){
-
-            for(int j=0;j<i;j++) array_random.add(random.nextInt(j));
-            for(int j=0;j<i;j++) array_ordered.add(j+1);
-            for(int j=0;j<i;j++) array_reverse.add(j-1);
-            for(int j=0;j<i;j++){
-                if(j>i/2) array_partially_ordered.add(random.nextInt(j));
-                else array_partially_ordered.add(j);
-            }
-
-            Integer[] m_array_random = array_random.toArray(new Integer[0]);
-            Integer[] m_array_ordered =array_ordered.toArray(new Integer[0]);
-            Integer[] m_array_reverse =array_reverse.toArray(new Integer[0]);
-            Integer[] m_array_partially_ordered = array_partially_ordered.toArray(new Integer[0]);
-
-            Benchmark<Boolean> benchmarkRandom = new Benchmark_Timer<>("randomSort",b->{
-                insertionSort.sort(m_array_random.clone(),0,m_array_random.length);
-            });
-            double resultRandom = benchmarkRandom.run(true,10);
-
-            Benchmark<Boolean> benchmarkOrdered = new Benchmark_Timer<>("orderedSort",b->{
-                insertionSort.sort(m_array_ordered.clone(),0,m_array_ordered.length);
-            });
-
-            double resultOrdered = benchmarkOrdered.run(true,10);
-
-            Benchmark<Boolean> benchmarkReverse = new Benchmark_Timer<>("reverseSort",b->{
-                insertionSort.sort(m_array_reverse.clone(),0,m_array_reverse.length);
-            });
-            double resultReverse= benchmarkReverse.run(true,10);
-
-            Benchmark<Boolean> benchmarkPartiallyOrdered = new Benchmark_Timer<>("partiallyOrderedSort",b->{
-                insertionSort.sort(m_array_partially_ordered.clone(),0,m_array_partially_ordered.length);
-            });
-            double resultPartiallyOrdered= benchmarkPartiallyOrdered.run(true,10);
-
-
-            System.out.println("The array size is : "+i);
-            System.out.println("Random :  "+resultRandom);
-            System.out.println("Ordered :  "+resultOrdered);
-            System.out.println("Reverse :  "+resultReverse);
-            System.out.println("PartiallyOrdered :  "+resultPartiallyOrdered + "\n\n");
-        }
-    }
+    
 }
