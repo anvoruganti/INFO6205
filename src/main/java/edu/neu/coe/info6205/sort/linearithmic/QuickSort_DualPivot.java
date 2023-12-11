@@ -1,10 +1,13 @@
 package edu.neu.coe.info6205.sort.linearithmic;
 
 import edu.neu.coe.info6205.sort.Helper;
+import edu.neu.coe.info6205.sort.InstrumentedHelper;
 import edu.neu.coe.info6205.util.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+import static scala.reflect.internal.NoPhase.description;
+import static scala.reflect.internal.SomePhase.description;
 
 /**
  * Class QuickSort_DualPivot which extends QuickSort.
@@ -104,6 +107,16 @@ public class QuickSort_DualPivot<X extends Comparable<X>> extends QuickSort<X> {
         }
 
         private final Helper<X> helper;
+    }
+    
+    public static void main(String[] args) {
+        int N = 1000;
+        
+        while(N < = 64000){
+        
+            InstrumentedHelper<Integer> instrumentedHelper = new InstrumentedHelper<>(description: "QuickSort_DualPivot", Config.setupConfig("a", "a", "a", "a", "a"));
+            
+        }
     }
 }
 

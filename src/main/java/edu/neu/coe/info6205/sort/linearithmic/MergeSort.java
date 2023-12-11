@@ -1,11 +1,18 @@
 package edu.neu.coe.info6205.sort.linearithmic;
 
 import edu.neu.coe.info6205.sort.Helper;
+import edu.neu.coe.info6205.sort.InstrumentedHelper;
 import edu.neu.coe.info6205.sort.SortWithHelper;
 import edu.neu.coe.info6205.sort.elementary.InsertionSort;
+import edu.neu.coe.info6205.util.Benchmark;
+import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.Config;
+import static java.time.LocalDateTime.from;
 
 import java.util.Arrays;
+import static org.apache.commons.math3.stat.inference.TestUtils.t;
+import static scala.reflect.internal.NoPhase.description;
+import static scala.reflect.internal.SomePhase.description;
 
 /**
  * Class MergeSort.
@@ -94,5 +101,41 @@ public class MergeSort<X extends Comparable<X>> extends SortWithHelper<X> {
     }
 
     private final InsertionSort<X> insertionSort;
+    
+    
+    
+    public static void main(String[] args) {
+        int N=1000;
+        
+        while(N<=64000){
+            InstrumentedHelper<Integer> instrumentedHelper = new InstrumentedHelper<>("MergeSort", Config.setupConfig(INSURANCE, NOCOPY, INSURANCE, NOCOPY, DESCRIPTION));
+            MergeSort<Integer> s = new MergeSort<>(instrumentedHelper);
+            int j = N;
+            s.init(j);
+            Integer[] xs = instrumentedHelper.random(Integer.class, r->r.nextInt(j));
+            Benchmark<Boolean> benchmark = new Benchmark_Timer<>(description:"Sorting", b->s.sort(xs,from:0,j));
+            double nTime = benchmark.run(t:true,m:20);
+            long nCompares = instrumentedHelper.getCompares();
+            long nSwaps = instrumentedHelper.getSwaps();
+            long nHits = instrumentedHelper.getHits();
+            
+            System.out.println("When array size: "+j);
+            System.out.println("Compares: " + nCompares);
+            System.out.println("Swaps: "+ nSwaps);
+            System.out.println("Hits: "+ nHits);
+            System.out.println("Time: "+ nTime);
+            System.out.println("\n For references : \t"+j+"\t"+nCompares+ "\t" + nSwaps + "\t" + nHits + "\t" + nTime + "\n");
+            
+            N=N*2;
+            
+            
+            
+        }
+        
+        
+        
+    }
+            
+   
 }
 
